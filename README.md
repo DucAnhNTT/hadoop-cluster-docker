@@ -26,7 +26,8 @@ Run `docker network inspect` on the network (e.g. `docker-hadoop-spark-hive_defa
 * Spark master: http://<dockerhadoop_IP_address>:8080/
 * Spark worker: http://<dockerhadoop_IP_address>:8081/
 * Hive: http://<dockerhadoop_IP_address>:10000
-
+* Airflow Webserver: http://<dockerhadoop_IP_address>:8082
+  
 ## Important note regarding Docker Desktop
 Since Docker Desktop turned “Expose daemon on tcp://localhost:2375 without TLS” off by default there have been all kinds of connection problems running the complete docker-compose. Turning this option on again (Settings > General > Expose daemon on tcp://localhost:2375 without TLS) makes it all work. I’m still looking for a more secure solution to this.
 
