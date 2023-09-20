@@ -388,6 +388,19 @@ services:
     ports:
       - "8089:8089"
 
+  superset:
+    image: amancevice/superset:latest
+    ports:
+      - "8090:8088"
+    environment:
+      - SUPERSET_DATABASE_URI=postgresql://airflow:airflow@hive-metastore-postgresql:5432/superset
+      - SECRET_KEY = '7/rWpXFGCHoqsEhUgxtPCg=='
+    depends_on:
+      - hive-metastore-postgresql
+    volumes:
+      - ./superset:/home/superset/.superset
+    restart: always
+
 volumes:
   hadoop_datanode:
   hadoop_namenode:
