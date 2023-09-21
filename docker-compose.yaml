@@ -62,6 +62,7 @@ x-airflow-common:
 services:
   postgres:
     image: postgres:13
+    container_name: postgres13
     environment:
       POSTGRES_USER: airflow
       POSTGRES_PASSWORD: airflow
@@ -77,6 +78,7 @@ services:
 
   redis:
     image: redis:latest
+    container_name: redis
     expose:
       - 6379
     healthcheck:
@@ -88,6 +90,7 @@ services:
     restart: always
 
   airflow-webserver:
+    container_name: airflow-webserver
     <<: *airflow-common
     command: webserver
     ports:
@@ -105,6 +108,7 @@ services:
         condition: service_completed_successfully
 
   airflow-scheduler:
+    container_name: airflow-scheduler
     <<: *airflow-common
     command: scheduler
     healthcheck:
@@ -120,6 +124,7 @@ services:
         condition: service_completed_successfully
 
   airflow-worker:
+    container_name: airflow-worker
     <<: *airflow-common
     command: celery worker
     healthcheck:
@@ -143,6 +148,7 @@ services:
         condition: service_completed_successfully
 
   airflow-triggerer:
+    container_name: airflow-triggerer
     <<: *airflow-common
     command: triggerer
     healthcheck:
@@ -389,17 +395,16 @@ services:
       - "8089:8089"
 
   superset:
-    image: amancevice/superset:latest
-    ports:
-      - "8090:8088"
-    environment:
-      - SUPERSET_DATABASE_URI=postgresql://airflow:airflow@hive-metastore-postgresql:5432/superset
-      - SECRET_KEY = '7/rWpXFGCHoqsEhUgxtPCg=='
-    depends_on:
-      - hive-metastore-postgresql
-    volumes:
-      - ./superset:/home/superset/.superset
-    restart: always
+      build:
+        context: ./superset
+        dockerfile: Dockerfile
+      container_name: superset
+      environment:
+        - ADMIN_USERNAME=admin
+        - ADMIN_EMAIL=admin@superset.com
+        - ADMIN_PASSWORD=admin
+      ports:
+        - '8088:8088'
 
 volumes:
   hadoop_datanode:
