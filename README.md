@@ -2,9 +2,9 @@
 
 # Docker multi-container environment with Hadoop, Spark and Hive, Airflow
 
-This is a Docker multi-container environment with Hadoop (HDFS), Spark and Hive, Airflow, Superset. This is a repository i'm currently working on and updating from Marcel Jan repo
+This is a Docker multi-container environment with Hadoop (HDFS), Spark and Hive, Airflow, Superset. This is a repository i'm currently working on and upgrading from Marcel Jan repo.
 
-There two things to concern is that Hive server doesn't start automatically. To be added when I understand how to do that in docker-compose. And I'm trying to update Hive to new version and the components in this 'docker-compose' file too. But overall this project run smoothly.
+There two things to concern is that Hive server doesn't start automatically. To be added when I understand how to do that in docker-compose. And I'm trying to update Hive to new version and the components in the 'docker-compose' file too. But overall this project run smoothly.
 
 
 ## Quick Start
